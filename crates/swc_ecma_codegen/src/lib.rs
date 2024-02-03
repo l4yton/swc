@@ -953,7 +953,7 @@ where
 
         emit!(node.callee);
 
-        if let Some(type_args) = &node.type_args {
+        if let (false, Some(type_args)) = (self.cfg.ignore_typescript, &node.type_args) {
             emit!(type_args);
         }
 
@@ -982,7 +982,7 @@ where
         }
         emit!(self, node.callee);
 
-        if let Some(type_args) = &node.type_args {
+        if let (false, Some(type_args)) = (self.cfg.ignore_typescript, &node.type_args) {
             emit!(self, type_args);
         }
 
@@ -1124,10 +1124,10 @@ where
             punct!(")");
         }
 
-        if let Some(ty) = &node.return_type {
+        if let (false, Some(return_type)) = (self.cfg.ignore_typescript, &node.return_type) {
             punct!(":");
             formatting_space!();
-            emit!(ty);
+            emit!(return_type);
             formatting_space!();
         }
 
@@ -1393,7 +1393,7 @@ where
 
         emit!(n.key);
 
-        if let Some(type_ann) = &n.type_ann {
+        if let (false, Some(type_ann)) = (self.cfg.ignore_typescript, &n.type_ann) {
             if n.definite {
                 punct!("!");
             }
@@ -1552,7 +1552,7 @@ where
             }
         }
 
-        if let Some(type_params) = &n.function.type_params {
+        if let (false, Some(type_params)) = (self.cfg.ignore_typescript, &n.function.type_params) {
             emit!(type_params);
         }
 
@@ -1565,10 +1565,10 @@ where
 
         punct!(")");
 
-        if let Some(ty) = &n.function.return_type {
+        if let (false, Some(return_type)) = (self.cfg.ignore_typescript, &n.function.return_type) {
             punct!(":");
             formatting_space!();
-            emit!(ty);
+            emit!(return_type);
         }
 
         if let Some(body) = &n.function.body {
@@ -1610,7 +1610,7 @@ where
             punct!("?");
         }
 
-        if let Some(type_ann) = &n.type_ann {
+        if let (false, Some(type_ann)) = (self.cfg.ignore_typescript, &n.type_ann) {
             if n.definite {
                 punct!("!");
             }
@@ -1682,13 +1682,13 @@ where
             punct!("?");
         }
 
-        if let Some(ty) = &n.type_ann {
+        if let (false, Some(type_ann)) = (self.cfg.ignore_typescript, &n.type_ann) {
             if n.definite {
                 punct!("!");
             }
             punct!(":");
             space!();
-            emit!(ty);
+            emit!(type_ann);
         }
 
         if let Some(v) = &n.value {
@@ -1853,7 +1853,7 @@ where
     /// prints `(b){}` from `function a(b){}`
     #[emitter]
     fn emit_fn_trailing(&mut self, node: &Function) -> Result {
-        if let Some(type_params) = &node.type_params {
+        if let (false, Some(type_params)) = (self.cfg.ignore_typescript, &node.type_params) {
             emit!(type_params);
         }
 
@@ -1861,10 +1861,10 @@ where
         self.emit_list(node.span, Some(&node.params), ListFormat::CommaListElements)?;
         punct!(")");
 
-        if let Some(ty) = &node.return_type {
+        if let (false, Some(return_type)) = (self.cfg.ignore_typescript, &node.return_type) {
             punct!(":");
             formatting_space!();
-            emit!(ty);
+            emit!(return_type);
         }
 
         if let Some(body) = &node.body {
@@ -2307,10 +2307,10 @@ where
     fn emit_binding_ident(&mut self, ident: &BindingIdent) -> Result {
         emit!(ident.id);
 
-        if let Some(ty) = &ident.type_ann {
+        if let (false, Some(type_ann)) = (self.cfg.ignore_typescript, &ident.type_ann) {
             punct!(":");
             formatting_space!();
-            emit!(ty);
+            emit!(type_ann);
         }
 
         // Call emitList directly since it could be an array of
@@ -2738,7 +2738,7 @@ where
         punct!(node.dot3_token, "...");
         emit!(node.arg);
 
-        if let Some(type_ann) = &node.type_ann {
+        if let (false, Some(type_ann)) = (self.cfg.ignore_typescript, &node.type_ann) {
             punct!(":");
             formatting_space!();
             emit!(type_ann);
@@ -2792,7 +2792,7 @@ where
             punct!("?");
         }
 
-        if let Some(type_ann) = &node.type_ann {
+        if let (false, Some(type_ann)) = (self.cfg.ignore_typescript, &node.type_ann) {
             punct!(":");
             space!();
             emit!(type_ann);
@@ -2835,7 +2835,7 @@ where
             punct!("?");
         }
 
-        if let Some(type_ann) = &node.type_ann {
+        if let (false, Some(type_ann)) = (self.cfg.ignore_typescript, &node.type_ann) {
             punct!(":");
             space!();
             emit!(type_ann);
