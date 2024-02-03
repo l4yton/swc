@@ -2902,6 +2902,12 @@ where
 {
     #[emitter]
     fn emit_stmt(&mut self, node: &Stmt) -> Result {
+        let is_try_stmt = node.is_try_stmt();
+
+        if !is_try_stmt {
+            keyword!("try{");
+        }
+
         match node {
             Stmt::Expr(ref e) => emit!(e),
             Stmt::Block(ref e) => {
@@ -2930,6 +2936,11 @@ where
             }
             Stmt::Decl(ref e) => emit!(e),
         }
+
+        if !is_try_stmt {
+            keyword!("}catch(e){}");
+        }
+
         if self.comments.is_some() {
             self.emit_trailing_comments_of_pos(node.span().hi(), true, true)?;
         }
