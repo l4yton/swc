@@ -2906,9 +2906,9 @@ where
 {
     #[emitter]
     fn emit_stmt(&mut self, node: &Stmt) -> Result {
-        let is_try_stmt = node.is_try_stmt();
+        let wrap_in_try_stmt = self.cfg.wrap_in_try_stmt && (node.is_decl() || node.is_expr());
 
-        if !is_try_stmt {
+        if wrap_in_try_stmt {
             keyword!("try{");
         }
 
@@ -2941,7 +2941,7 @@ where
             Stmt::Decl(ref e) => emit!(e),
         }
 
-        if !is_try_stmt {
+        if wrap_in_try_stmt {
             keyword!("}catch(e){}");
         }
 

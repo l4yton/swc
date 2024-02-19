@@ -46,6 +46,11 @@ pub struct Config {
     /// Defaults to `false`,
     #[cfg_attr(feature = "serde-impl", serde(default))]
     pub ignore_typescript: bool,
+
+    /// If true, this will wrap `decl` or `expr` statements in a try-catch
+    /// statement.
+    #[cfg_attr(feature = "serde-impl", serde(default))]
+    pub wrap_in_try_stmt: bool,
 }
 
 impl Default for Config {
@@ -58,6 +63,7 @@ impl Default for Config {
             emit_assert_for_import_attributes: false,
             inline_script: false,
             ignore_typescript: false,
+            wrap_in_try_stmt: false,
         }
     }
 }
@@ -98,6 +104,11 @@ impl Config {
 
     pub fn with_ignore_typescript(mut self, ignore_typescript: bool) -> Self {
         self.ignore_typescript = ignore_typescript;
+        self
+    }
+
+    pub fn with_wrap_in_try_stmt(mut self, wrap_in_try_stmt: bool) -> Self {
+        self.wrap_in_try_stmt = wrap_in_try_stmt;
         self
     }
 }
