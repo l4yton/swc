@@ -86,7 +86,6 @@ pub struct SetterProp {
 pub struct MethodProp {
     pub key: PropName,
 
-    #[cfg_attr(feature = "serde-impl", serde(flatten))]
     #[span]
     pub function: Box<Function>,
 }

@@ -597,7 +597,6 @@ pub struct FnExpr {
     #[cfg_attr(feature = "serde-impl", serde(default, rename = "identifier"))]
     pub ident: Option<Ident>,
 
-    #[cfg_attr(feature = "serde-impl", serde(flatten))]
     #[span]
     pub function: Box<Function>,
 }
@@ -631,7 +630,6 @@ pub struct ClassExpr {
     #[cfg_attr(feature = "serde-impl", serde(default, rename = "identifier"))]
     pub ident: Option<Ident>,
 
-    #[cfg_attr(feature = "serde-impl", serde(flatten))]
     #[span]
     pub class: Box<Class>,
 }

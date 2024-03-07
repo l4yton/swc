@@ -30,7 +30,6 @@ use crate::typescript::TsTypeAnn;
 #[cfg_attr(feature = "serde-impl", derive(serde::Serialize, serde::Deserialize))]
 pub struct BindingIdent {
     #[span]
-    #[cfg_attr(feature = "serde-impl", serde(flatten))]
     #[cfg_attr(feature = "__rkyv", omit_bounds)]
     pub id: Ident,
     #[cfg_attr(feature = "serde-impl", serde(default, rename = "typeAnnotation"))]

@@ -60,7 +60,6 @@ pub struct FnDecl {
     #[cfg_attr(feature = "serde-impl", serde(default))]
     pub declare: bool,
 
-    #[cfg_attr(feature = "serde-impl", serde(flatten))]
     #[span]
     pub function: Box<Function>,
 }
@@ -85,7 +84,6 @@ pub struct ClassDecl {
     #[cfg_attr(feature = "serde-impl", serde(default))]
     pub declare: bool,
 
-    #[cfg_attr(feature = "serde-impl", serde(flatten))]
     #[span]
     pub class: Box<Class>,
 }
