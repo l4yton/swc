@@ -158,8 +158,6 @@ where
             self.wr.write_str_lit(DUMMY_SP, shebang)?;
             self.wr.write_line()?;
         }
-
-        keyword!("(async ()=>{");
         for stmt in &node.body {
             emit!(stmt);
         }
@@ -168,8 +166,6 @@ where
         if !self.cfg.omit_last_semi {
             self.wr.commit_pending_semi()?;
         }
-
-        keyword!("})();");
     }
 
     #[emitter]
