@@ -36,13 +36,13 @@ where
 
     #[emitter]
     fn emit_ts_as_expr(&mut self, n: &TsAsExpr) -> Result {
-        if self.cfg.ignore_typescript {
-            return Ok(());
-        }
-
         self.emit_leading_comments_of_span(n.span(), false)?;
 
         emit!(n.expr);
+
+        if self.cfg.ignore_typescript {
+            return Ok(());
+        }
 
         space!();
         keyword!("as");
