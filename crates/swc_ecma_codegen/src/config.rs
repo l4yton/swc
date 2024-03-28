@@ -39,6 +39,12 @@ pub struct Config {
 
     #[cfg_attr(feature = "serde-impl", serde(default))]
     pub inline_script: bool,
+
+    #[cfg_attr(feature = "serde-impl", serde(default))]
+    pub ignore_typescript: bool,
+
+    #[cfg_attr(feature = "serde-impl", serde(default))]
+    pub try_catch: bool,
 }
 
 impl Default for Config {
@@ -50,6 +56,8 @@ impl Default for Config {
             omit_last_semi: false,
             emit_assert_for_import_attributes: false,
             inline_script: false,
+            ignore_typescript: false,
+            try_catch: false,
         }
     }
 }
@@ -85,6 +93,16 @@ impl Config {
 
     pub fn with_inline_script(mut self, inline_script: bool) -> Self {
         self.inline_script = inline_script;
+        self
+    }
+
+    pub fn with_ignore_typescript(mut self, ignore_typescript: bool) -> Self {
+        self.ignore_typescript = ignore_typescript;
+        self
+    }
+
+    pub fn with_try_catch(mut self, try_catch: bool) -> Self {
+        self.try_catch = try_catch;
         self
     }
 }
