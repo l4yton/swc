@@ -138,7 +138,7 @@ impl Mark {
     }
 
     #[inline]
-    pub fn from_u32(raw: u32) -> Mark {
+    pub const fn from_u32(raw: u32) -> Mark {
         Mark(raw)
     }
 
@@ -374,7 +374,7 @@ impl SyntaxContext {
     }
 
     #[inline]
-    pub fn from_u32(raw: u32) -> SyntaxContext {
+    pub const fn from_u32(raw: u32) -> SyntaxContext {
         SyntaxContext(raw)
     }
 
